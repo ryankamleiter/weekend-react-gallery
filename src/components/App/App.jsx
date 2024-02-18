@@ -25,19 +25,15 @@ function App() {
     })
   }
 
-  const handleLike = (id) => {
-    axios({
-      method: "PUT",
-      url: `/api/gallery/like/${id}`
-    })
-      .then((response) => {
-          getGallery();
-      })
-      .catch((err) => {
-        console.log('error liking item', err);
-      })
-    }
-  
+  const updateGalleryItem = (id, likes) => {
+    const updatedGalleryItems = galleryItems.map(item => {
+      if (item.id === id) {
+        return { ...item, likes };
+      }
+      return item;
+    });
+    setGalleryItems(updatedGalleryItems);
+  };
 
 
     return (
@@ -46,7 +42,7 @@ function App() {
           <h1>React Gallery</h1>
         </header>
 
-        <GalleryList galleryItems={galleryItems} getGallery={getGallery}/>
+        <GalleryList galleryItems={galleryItems} updateGalleryItem={updateGalleryItem}/>
 
       </div>
     );

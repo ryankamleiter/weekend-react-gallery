@@ -3,25 +3,21 @@ import React from 'react';
 import './GalleryList.css'
 import GalleryItem from '../GalleryItem.jsx/GalleryItem';
 
-function GalleryList(props) {
-    console.log('props: ', props.galleryItems);
-
+function GalleryList({ galleryItems, updateGalleryItem }) {
     return (
-
-        <div className='galleryItems' data-testid="galleryList">
-            {props.galleryItems.map((item) => (
-                <GalleryItem key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    img_url={item.url}
-                    description={item.description}
-                    likes={item.likes}
-                    />
-                ))}
-        </div>
-
-
-    )
-}
+      <div className='galleryItems' data-testid="galleryList">
+        {galleryItems.map((item) => (
+          <GalleryItem key={item.id}
+            id={item.id}
+            title={item.title}
+            img_url={item.url}
+            description={item.description}
+            likes={item.likes}
+            updateGalleryItem={updateGalleryItem}
+          />
+        ))}
+      </div>
+    );
+  }
 
 export default GalleryList

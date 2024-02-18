@@ -6,11 +6,12 @@ function GalleryItem(props) {
     const [showImage, setShowImage] = useState(true);
     const [galleryLikes, setGalleryLikes] = useState(props.likes);
 
-    const likeItem = (event) => {
+    const likeItem = () => {
         axios.put(`/api/gallery/like/${props.id}`)
             .then(response => {
                 console.log('in put GalleryItem', response)
-                setGalleryLikes(response.data.likes);
+                setGalleryLikes(prevLikes => prevLikes + 1);
+                props.updateGalleryItem(props.id, response.data.likes);
             })
             .catch(err => {
                 console.log('error in put', err)
@@ -29,7 +30,7 @@ function GalleryItem(props) {
                
               
             </span>
-            <p>Likes: {props.likes}</p>
+            <p>Likes: {galleryLikes}</p>
                 <button onClick={() => likeItem()} data-testid="like">Like</button>
                 <button onClick={toggleImg} data-testid="toggle">Toggle</button>
             <p>{props.description}</p>
