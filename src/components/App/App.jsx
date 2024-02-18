@@ -19,7 +19,6 @@ function App() {
     })
     .then((response) => {
       setGalleryItems(response.data);
-      console.log(response.data)
     })
     .catch((err) => {
       console.log("error getting gallery", err)
@@ -42,22 +41,12 @@ function App() {
 
 
     return (
-      <div>
+      <div data-testid="app">
         <header>
           <h1>React Gallery</h1>
         </header>
 
         <GalleryList galleryItems={galleryItems} getGallery={getGallery}/>
-        {galleryItems.map((item) => (
-          <GalleryItem
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          description={item.description}
-          handleLike={handleLike}
-          url={item.url}
-          />
-        ))}
 
       </div>
     );
